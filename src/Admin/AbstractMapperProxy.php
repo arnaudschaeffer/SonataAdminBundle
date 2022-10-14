@@ -2,22 +2,19 @@
 
 namespace Aschaeffer\SonataAdminBundle\Admin;
 
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Mapper\MapperInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 abstract class AbstractMapperProxy {
 
-    protected $mapper;
+    protected MapperInterface $mapper;
 
-    protected $delegateClass;
+    protected \ReflectionClass $delegateClass;
 
-    protected $baseName;
+    protected string $baseName;
 
-    protected $normalizer;
+    protected string $normalizer;
 
     /**
      * @var NameConverterInterface
@@ -26,12 +23,7 @@ abstract class AbstractMapperProxy {
 
     protected $useCommon = ['id', 'label', 'updatedAt', 'createdAt', 'enabled', 'position', 'lastUpdate', 'slug', 'createdByUsername', 'updatedByUsername', '_action'];
 
-    /**
-     *
-     * @param FormMapper|ShowMapper|ListMapper|DatagridMapper $mapper
-     * @param string $baseName
-     */
-    public function __construct($mapper, $baseName)
+    public function __construct(MapperInterface $mapper, string $baseName)
     {
         $this->mapper = $mapper;
         $this->delegateClass = new \ReflectionClass($this->mapper);
@@ -42,7 +34,7 @@ abstract class AbstractMapperProxy {
     }
 
 
-    protected function getPropertyLabel($name, array $options = array())
+    protected function getPropertyLabel(string $name, array $options = array()): string
     {
         if (!array_key_exists('label', $options)) {
             $baseName = lcfirst($this->baseName);

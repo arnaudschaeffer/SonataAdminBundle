@@ -6,12 +6,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class DatagridMapperProxy extends AbstractMapperProxy {
 
-    /**
-     *
-     * @param DatagridMapper $mapper
-     * @param string $baseName
-     */
-    public function __construct($mapper, $baseName)
+    public function __construct(DatagridMapper $mapper, string $baseName)
     {
         parent::__construct($mapper, $baseName);
     }
@@ -19,12 +14,10 @@ class DatagridMapperProxy extends AbstractMapperProxy {
     public function add($name,
                         $type = null,
                         array $filterOptions = [],
-                        $fieldType = null,
-                        $fieldOptions = null,
-                        array $fieldDescriptionOptions = [])
+                        array $fieldDescriptionOptions = []): self
     {
         $filterOptions['label'] = $this->getPropertyLabel($name, $filterOptions);
-        $this->mapper->add($name, $type, $filterOptions, $fieldType, $fieldOptions, $fieldDescriptionOptions);
+        $this->mapper->add($name, $type, $filterOptions, $fieldDescriptionOptions);
 
         return $this;
     }
