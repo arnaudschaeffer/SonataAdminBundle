@@ -9,17 +9,11 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 abstract class AbstractMapperProxy {
 
     protected MapperInterface $mapper;
-
     protected \ReflectionClass $delegateClass;
-
     protected string $baseName;
-
     protected string $normalizer;
 
-    /**
-     * @var NameConverterInterface
-     */
-    protected $converter;
+    protected NameConverterInterface $converter;
 
     protected $useCommon = ['id', 'label', 'updatedAt', 'createdAt', 'enabled', 'position', 'lastUpdate', 'slug', 'createdByUsername', 'updatedByUsername', '_action'];
 
