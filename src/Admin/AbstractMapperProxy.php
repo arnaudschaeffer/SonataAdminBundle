@@ -15,7 +15,7 @@ abstract class AbstractMapperProxy {
 
     protected NameConverterInterface $converter;
 
-    protected $useCommon = ['id', 'label', 'updatedAt', 'createdAt', 'enabled', 'position', 'lastUpdate', 'slug', 'createdByUsername', 'updatedByUsername', '_action'];
+    protected $useCommon = ['id', 'label', 'updatedAt', 'createdAt', 'enabled', 'position', 'lastUpdate', 'slug', 'createdByUsername', 'updatedByUsername', '_actions'];
 
     public function __construct(MapperInterface $mapper, string $baseName)
     {
